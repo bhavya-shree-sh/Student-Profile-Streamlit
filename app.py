@@ -18,7 +18,7 @@ st.markdown("""
 
 # Application heading
 st.title("🎓 Student Profile Application")
-st.caption("Developed By: Akshaya K.N")
+st.caption("Developed By: BHAVYASHREE S H")
 
 # Student details
 name = st.text_area("Student Name", placeholder="Enter your name")
