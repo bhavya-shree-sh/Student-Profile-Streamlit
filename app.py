@@ -1,69 +1,24 @@
 import streamlit as st
+from groq import Groq
+st.set_page_config(page_title="Gnanesh N",page_icon="🥰", layout="centered")
+st.title("🎓 Student Profile Application")
+st.caption("Developed by: Gnanesh N")
+try:
+  client=Groq(api_key=st.secrets["GROQ_API_KEY"])
+except (keyError, FileNotFoundError):
+  st.error("API key is missing. addit in advanced settings")
+  st.stop()
+name=st.text_area("Student Name","Enter Your Name")
+usn=st.text_area("USN / Roll no.","Enter your USN")
+dept=st.text_area("Department","Enter Your Department")
+year=st.radio("Current Year",["1st year","2nd Year","3rd Year","4th Year"])
+btn=st.button("View My Profile")
+if btn:
+    st.success("Profile Created Successfully!")
 
-# Page configuration
-st.set_page_config(
-    page_title="Student Profile",
-    page_icon="🎓",
-    layout="centered"
-)
+    st.subheader("🎓 Student Profile Details")
 
-# Black background and white text
-st.markdown("""
-<style>
-.stApp {
-    background-color: black;
-    color: white;
-}
-h1, h2, h3, p, label {
-    color: white !important;
-}
-</style>
-""", unsafe_allow_html=True)
-
-st.title("Student Profile")
-
-# Student details form
-with st.form("student_form"):
-
-    name = st.text_input("Name")
-    roll = st.text_input("Roll Number")
-
-    department = st.selectbox(
-        "Department",
-        ["CSE", "ISE", "ECE", "EEE", "ME"]
-    )
-
-    year = st.selectbox(
-        "Year",
-        ["1st Year", "2nd Year", "3rd Year", "4th Year"]
-    )
-
-    submit = st.form_submit_button("Submit Profile")
-
-    if submit:
-        if name and roll:
-            st.session_state.profile = {
-                "name": name,
-                "roll": roll,
-                "department": department,
-                "year": year
-            }
-            st.session_state.submitted = True
-        else:
-            st.warning("Please enter all details.")
-
-# Display profile
-if st.session_state.get("submitted", False):
-
-    st.success("Profile submitted successfully!")
-
-    if st.button("View My Profile"):
-
-        st.subheader("My Profile")
-
-        profile = st.session_state.profile
-
-        st.write("Name:", profile["name"])
-        st.write("Roll Number:", profile["roll"])
-        st.write("Department:", profile["department"])
-        st.write("Year:", profile["year"])
+    st.write("**Student Name:**", name)
+    st.write("**USN / Roll No.:**", usn)
+    st.write("**Department:**", dept)
+    st.write("**Current Year:**", year)
