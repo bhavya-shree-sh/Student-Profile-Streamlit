@@ -1,51 +1,18 @@
 import streamlit as st
-
-# Page configuration
-st.set_page_config(
-    page_title="Student Profile Application",
-    page_icon="🎓",
-    layout="centered"
-)
-
-# Custom dark background
-st.markdown("""
-<style>
-.stApp {
-    background-color: #171717;
-}
-</style>
-""", unsafe_allow_html=True)
-
-# Application heading
-st.title("🎓 Student Profile Application")
-st.caption("Developed By: BHAVYASHREE S H")
-
-# Student details
-name = st.text_area("Student Name", placeholder="Enter your name")
-
-roll = st.text_area("USN / Roll no.", placeholder="Enter your USN")
-
-department = st.text_area("Department", placeholder="Enter your department")
-
-# Current year selection
-year = st.radio(
-    "Current Year",
-    ["1st Year", "2nd Year", "3rd Year", "4th Year"]
-)
-
-# View profile button
+st.set_page_config(page_title="Student Information", layout="centered")
+st.title('Student Profile Application')
+st.caption("Launched by DEEKSHITHA DS")
+st.caption('Fill in your details and click View My profile.')
+name = st.text_input("Student Name", placeholder="Enter your name")
+roll_no = st.text_input("USN / Roll Number", placeholder="Enter roll number")
+department = st.selectbox("Department", ["CSE", "ISE", "ECE", "EEE", "ME", "Civil"])
+year = st.radio("Current Year",["1st Year", "2nd Year", "3rd Year", "4th Year"])
 if st.button("View My Profile"):
-
-    if name and roll and department:
-
-        st.success("Profile Created Successfully!")
-
-        st.subheader("🎓 Student Profile Details")
-
-        st.write("**Student Name:**", name)
-        st.write("**USN / Roll No.:**", roll)
-        st.write("**Department:**", department)
-        st.write("**Current Year:**", year)
-
+    if name and roll_no:
+        st.success("Profile submitted successfully!")
+        st.write("Name:", name)
+        st.write("Roll Number:", roll_no)
+        st.write("Department:", department)
+        st.write("Year:", year)
     else:
-        st.warning("Please fill all the details!")
+        st.warning("Please enter your name and roll number.")
