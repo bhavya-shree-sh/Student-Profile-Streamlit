@@ -1,24 +1,51 @@
 import streamlit as st
-from groq import Groq
-st.set_page_config(page_title="Gnanesh N",page_icon="🥰", layout="centered")
+
+# Page configuration
+st.set_page_config(
+    page_title="Student Profile Application",
+    page_icon="🎓",
+    layout="centered"
+)
+
+# Custom dark background
+st.markdown("""
+<style>
+.stApp {
+    background-color: #171717;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# Application heading
 st.title("🎓 Student Profile Application")
-st.caption("Developed by: Gnanesh N")
-try:
-  client=Groq(api_key=st.secrets["GROQ_API_KEY"])
-except (keyError, FileNotFoundError):
-  st.error("API key is missing. addit in advanced settings")
-  st.stop()
-name=st.text_area("Student Name","Enter Your Name")
-usn=st.text_area("USN / Roll no.","Enter your USN")
-dept=st.text_area("Department","Enter Your Department")
-year=st.radio("Current Year",["1st year","2nd Year","3rd Year","4th Year"])
-btn=st.button("View My Profile")
-if btn:
-    st.success("Profile Created Successfully!")
+st.caption("Developed By: Akshaya K.N")
 
-    st.subheader("🎓 Student Profile Details")
+# Student details
+name = st.text_area("Student Name", placeholder="Enter your name")
 
-    st.write("**Student Name:**", name)
-    st.write("**USN / Roll No.:**", usn)
-    st.write("**Department:**", dept)
-    st.write("**Current Year:**", year)
+roll = st.text_area("USN / Roll no.", placeholder="Enter your USN")
+
+department = st.text_area("Department", placeholder="Enter your department")
+
+# Current year selection
+year = st.radio(
+    "Current Year",
+    ["1st Year", "2nd Year", "3rd Year", "4th Year"]
+)
+
+# View profile button
+if st.button("View My Profile"):
+
+    if name and roll and department:
+
+        st.success("Profile Created Successfully!")
+
+        st.subheader("🎓 Student Profile Details")
+
+        st.write("**Student Name:**", name)
+        st.write("**USN / Roll No.:**", roll)
+        st.write("**Department:**", department)
+        st.write("**Current Year:**", year)
+
+    else:
+        st.warning("Please fill all the details!")
